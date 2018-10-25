@@ -47935,7 +47935,20 @@ var render = function() {
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(task.priority))]),
               _vm._v(" "),
-              _vm._m(1, true)
+              _c("td", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-sm btn-danger",
+                    on: {
+                      click: function($event) {
+                        _vm.removeTask(task.id)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fa fa-trash" })]
+                )
+              ])
             ])
           })
         )
@@ -47957,16 +47970,6 @@ var staticRenderFns = [
         _c("th", [_vm._v("Priority")]),
         _vm._v(" "),
         _c("th")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-sm btn-danger" }, [
-        _c("i", { staticClass: "fa fa-trash" })
       ])
     ])
   }
@@ -48057,6 +48060,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             window.axios.post('/api/task', this.task).then(function (savedTask) {
                 _this2.tasks.push(savedTask.data);
                 _this2.task.title = '';
+            });
+        },
+        removeTask: function removeTask(id) {
+            var _this3 = this;
+
+            window.axios.delete('/api/task/' + id).then(function () {
+                var index = _this3.tasks.findIndex(function (task) {
+                    return task.id === id;
+                });
+                _this3.tasks.splice(index, 1);
             });
         }
     }

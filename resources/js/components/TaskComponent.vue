@@ -31,7 +31,7 @@
                         <td>{{ task.id }}</td>
                         <td>{{ task.title }}</td>
                         <td>{{ task.priority }}</td>
-                        <td><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></td>
+                        <td><button @click="removeTask(task.id)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></td>
                     </tr>
                 </tbody>
             </table>
@@ -62,6 +62,12 @@
                 window.axios.post('/api/task', this.task).then(savedTask => {
                     this.tasks.push(savedTask.data);
                     this.task.title = '';
+                });
+            },
+            removeTask(id) {
+                window.axios.delete(`/api/task/${id}`).then(() => {
+                    let index = this.tasks.findIndex(task => task.id === id);
+                    this.tasks.splice(index, 1);
                 });
             }
         }
