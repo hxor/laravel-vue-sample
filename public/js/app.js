@@ -48057,10 +48057,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         storeTask: function storeTask() {
             var _this2 = this;
 
-            window.axios.post('/api/task', this.task).then(function (savedTask) {
-                _this2.tasks.push(savedTask.data);
-                _this2.task.title = '';
-            });
+            if (this.checkSubmit()) {
+                window.axios.post('/api/task', this.task).then(function (savedTask) {
+                    _this2.tasks.push(savedTask.data);
+                    _this2.task.title = '';
+                    _this2.task.priority = '';
+                });
+            }
         },
         removeTask: function removeTask(id) {
             var _this3 = this;
@@ -48071,6 +48074,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
                 _this3.tasks.splice(index, 1);
             });
+        },
+        checkSubmit: function checkSubmit() {
+            if (this.task.title && this.task.priority) return true;
         }
     }
 });

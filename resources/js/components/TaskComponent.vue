@@ -59,16 +59,22 @@
                 });
             },
             storeTask() {
-                window.axios.post('/api/task', this.task).then(savedTask => {
-                    this.tasks.push(savedTask.data);
-                    this.task.title = '';
-                });
+                if (this.checkSubmit()) {
+                    window.axios.post('/api/task', this.task).then(savedTask => {
+                        this.tasks.push(savedTask.data);
+                        this.task.title = '';
+                        this.task.priority = '';
+                    });
+                }
             },
             removeTask(id) {
                 window.axios.delete(`/api/task/${id}`).then(() => {
                     let index = this.tasks.findIndex(task => task.id === id);
                     this.tasks.splice(index, 1);
                 });
+            },
+            checkSubmit() {
+                if (this.task.title && this.task.priority) return true;
             }
         }
     }
