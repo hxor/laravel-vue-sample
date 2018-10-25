@@ -14,7 +14,8 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <app-component></app-component>
+
                 </div>
             </div>
         </div>

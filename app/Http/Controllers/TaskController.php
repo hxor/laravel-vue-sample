@@ -85,9 +85,9 @@ class TaskController extends Controller
      * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $task)
+    public function destroy($id)
     {
-        $model = $task->delete();
+        $model = Task::destroy($id);
 
         return response()->json($model, 201);
     }
