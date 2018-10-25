@@ -47270,7 +47270,7 @@ exports = module.exports = __webpack_require__(42)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47741,36 +47741,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
         console.log('Component Mounted');
-    },
-    data: function data() {
-        return {
-            message: 'Hello World'
-        };
     },
 
     components: { TaskComponent: __WEBPACK_IMPORTED_MODULE_0__TaskComponent_vue___default.a }
@@ -47784,56 +47760,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "app-component" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [_c("task-component")], 1)
-  ])
+  return _c("div", { staticClass: "app-component" }, [_c("task-component")], 1)
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("form", { staticClass: "form-inline" }, [
-          _c("div", { staticClass: "form-group mx-sm-3 mb-2" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "text", name: "task", placeholder: "Task" }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group mx-sm-3 mb-2" }, [
-            _c(
-              "select",
-              {
-                staticClass: "form-control",
-                attrs: { name: "priority", id: "" }
-              },
-              [
-                _c("option", { attrs: { value: "low" } }, [_vm._v("Low")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "medium" } }, [
-                  _vm._v("Medium")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "high" } }, [_vm._v("High")])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn btn-primary mb-2", attrs: { type: "submit" } },
-            [_vm._v("Submit")]
-          )
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -47913,24 +47842,104 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-md-12" }, [
-    _c("table", { staticClass: "table" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "tbody",
-        _vm._l(_vm.tasks, function(task, id) {
-          return _c("tr", { key: id }, [
-            _c("td", [_vm._v(_vm._s(task.id))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(task.title))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(task.priority))]),
-            _vm._v(" "),
-            _vm._m(1, true)
-          ])
-        })
-      )
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-md-12" }, [
+      _c("div", { staticClass: "form-inline" }, [
+        _c("div", { staticClass: "form-group mx-sm-3 mb-2" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.task.title,
+                expression: "task.title"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", name: "task", placeholder: "Task" },
+            domProps: { value: _vm.task.title },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.task, "title", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group mx-sm-3 mb-2" }, [
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.task.priority,
+                  expression: "task.priority"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { name: "priority", id: "" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.task,
+                    "priority",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "low" } }, [_vm._v("Low")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "medium" } }, [_vm._v("Medium")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "high" } }, [_vm._v("High")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary mb-2", on: { click: _vm.storeTask } },
+          [_vm._v("Submit")]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-12" }, [
+      _c("table", { staticClass: "table" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.tasks, function(task, id) {
+            return _c("tr", { key: id }, [
+              _c("td", [_vm._v(_vm._s(task.id))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(task.title))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(task.priority))]),
+              _vm._v(" "),
+              _vm._m(1, true)
+            ])
+          })
+        )
+      ])
     ])
   ])
 }
@@ -48000,6 +48009,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     created: function created() {
@@ -48007,7 +48034,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            tasks: []
+            tasks: [],
+            task: { title: '', priority: '' }
         };
     },
 
@@ -48021,6 +48049,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 data.forEach(function (task) {
                     _this.tasks.push(task);
                 });
+            });
+        },
+        storeTask: function storeTask() {
+            var _this2 = this;
+
+            window.axios.post('/api/task', this.task).then(function (savedTask) {
+                _this2.tasks.push(savedTask.data);
+                _this2.task.title = '';
             });
         }
     }

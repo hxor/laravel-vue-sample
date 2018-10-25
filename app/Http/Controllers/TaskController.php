@@ -40,7 +40,7 @@ class TaskController extends Controller
         $model = new Task();
         $model->title = $request->title;
         $model->priority = $request->priority;
-        $model->user_id = request()->user()->id;
+        $model->user_id = 1;
         $model->save();
         return response()->json($model, 201);
     }
